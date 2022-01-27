@@ -1,12 +1,11 @@
 /**
  * COP 4620 - Construction of Language Translators (Compilers)
  * Step 1
- * @author <Derrick Palma & Bradley Cructchfield>
+ * @author <Derrick Palma & Bradley Crutchfield>
  * @version <January 30, 2022>
  */
-
 import org.antlr.v4.runtime.*;
-import org.antlr.v4.runtime.tree.*;
+
 public class Test {
     public static void main(String[] args) throws Exception {
         // create a CharStream that reads from standard input
