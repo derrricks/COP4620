@@ -5,8 +5,12 @@ lexer grammar Little; // define grammar ('Little' must match file name)
 IDENTIFIER: [a-zA-Z][a-zA-Z0-9]*; // will begin with a letter, followed by any number of letters and numbers (case sensitive)
 INTLITERAL: [0-9]+; // any integer number
 FLOATLITERAL: [0-9]*'.'[0-9]+; // floating point number (decimal value)
+
+//DOES NOT WORK
 STRINGLITERAL:	'"' ~ ["] '"';  // any string in between "xxxxxxxx" -> xxxxxxxx
+
+
 COMMENT: '--'[0-9a-zA-Z]* -> skip; // anything after -- can be ignored
 KEYWORD: 'PROGRAM' | 'BEGIN' | 'END' | 'FUNCTION' | 'READ' | 'WRITE' | 'IF' | 'ELSE' | 'ENDIF' | 'WHILE' | 'ENDWHILE' | 'CONTINUE' | 'BREAK' | 'RETURN' | 'INT' | 'VOID' | 'STRING' | 'FLOAT'; // predefined values
 OPERATORS: ':=' | '+' | '-' | '*' | '/' | '=' | '!=' | '<' | '>' | '(' | ')' | ';' | ',' | '<=' | '>='; // predefined values
-WS: [ \t\r\n]+ -> skip; //skips all whitespace
+//WS: [ \t\r\n]+ -> skip; //skips all whitespace
