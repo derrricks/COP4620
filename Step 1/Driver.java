@@ -9,37 +9,19 @@ import java.io.*;
 
 public class Driver {
     public static void main(String[] args) throws Exception {
+       
+        //System.out.println("Parsing: " + args[0]); // Parsing: (name of file being parsed.micro)
 
-        System.out.println("Parsing: " + args[0]); // Parsing: (name of file being parsed.micro)
-
-        FileInputStream fInStrm = new FileInputStream(new File(args[0]));
-        ANTLRInputStream input = new ANTLRInputStream(fInStrm);
+        InputStream in = System.in;
+        ANTLRInputStream input = new ANTLRInputStream(in);
         Little lexer = new Little(input); // this must match antlr_grammar.g4 file name
         Token token = lexer.nextToken();
+	    Vocabulary token2 = lexer.getVocabulary();
 
-        while(token.getType() != Little.EOF){ // while not end of .g4 file -> get token type
-            System.out.println("\t" + getTokenType(token.getType()) + "\t\t" + token.getText());
+        while(token.getType() != token.EOF){ // while not end of .g4 file -> get token type
+            //System.out.println("\t" + getTokenType(token.getType()) + "\t\t" + token.getText());
+	        System.out.println("Token Type: " + token2.getSymbolicName(token.getType()) + "\nValue: " + token.getText());
             token = lexer.nextToken();
-        }
-    }
-    private static String getTokenType(int tokenType) {
-        switch (tokenType) {
-            case Little.IDENTIFIER:
-                return "IDENTIFIER";
-            case Little.INTLITERAL:
-                return "INTLITERAL";
-            case Little.FLOATLITERAL:
-                return "FLOATLITERAL";
-            case Little.STRINGLITERAL:
-                return "STRINGLITERAL";
-            case Little.COMMENT:
-                return "COMMENT";
-            case Little.KEYWORD:
-                return "KEYWORD";
-            case Little.OPERATORS: // OPERATOR is not recognized (throws error), OPERATORS is
-                return "OPERATORS";
-            default:
-                return "OTHER";
         }
     }
 }
