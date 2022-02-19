@@ -18,6 +18,7 @@ public class Driver {
         LittleLexer lexer = new LittleLexer(input); // this must match antlr_grammar.g4 file name, will use g4 grammar
         CommonTokenStream cts = new CommonTokenStream(lexer);
 	LittleParser parser = new LittleParser(cts);
+	parser.removeErrorListeners();
 	parser.program();
 
 	if(parser.getNumberOfSyntaxErrors() == 0){
