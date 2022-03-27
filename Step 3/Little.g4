@@ -7,7 +7,7 @@ IDENTIFIER: [a-zA-Z][a-zA-Z0-9]*; // will begin with a letter, followed by any n
 INTLITERAL: [0-9]+; // any integer number
 FLOATLITERAL: [0-9]*'.'[0-9]+; // floating point number (decimal value)
 STRINGLITERAL: '"'[ -!#-~]*'"';  // any string in between "xxxxxxxx" -> xxxxxxxx
-COMMENT: '--'[0-9a-zA-Z(); ]* -> skip; // anything after -- can be ignored
+COMMENT: '--'[\t]*[0-9a-zA-Z();*:=+-/!<> ]* -> skip; // anything after -- can be ignored
 OPERATORS: ':=' | '+' | '-' | '*' | '/' | '=' | '!=' | '<' | '>' | '(' | ')' | ';' | ',' | '<=' | '>='; // predefined values
 WS: [ \t\r\n]+ -> skip; //skips all whitespace
 

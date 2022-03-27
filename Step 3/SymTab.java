@@ -28,6 +28,11 @@ public class SymTab { // symbol table class used to represent each table as need
 
     public void insertToTable(String name, String type, String value) { // method to insert into table
         ArrayList<String> symbol = new ArrayList<>(); // used to insert into symtab
+	
+	if(symtab.containsKey(name)){
+		System.out.println("DECLARATION ERROR " + name);
+		System.exit(0);
+	}
         symbol.add(name); // record name
         symbol.add(type);
         symbol.add(value); // record null if not a string
@@ -49,11 +54,11 @@ public class SymTab { // symbol table class used to represent each table as need
             String name = symbol.get(0); // get name value for current symbol
             String type = symbol.get(1);
 
-            String output = "name" + name + "type" + type;
+            String output = "name " + name + " type " + type;
 
-            if(symbol.get(2) != null){
+            if(!symbol.get(2).equals("")){
                 String value = symbol.get(2);
-                output = output.concat("value" + value);
+                output = output.concat(" value " + value);
             }
             System.out.println(output);
         }
