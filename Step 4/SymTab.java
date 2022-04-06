@@ -25,7 +25,7 @@ public class SymTab { // symbol table class used to represent each table as need
     public SymTab(String tableName) { // Symbol Table constuctor, pass through name of table to call
         this.tableName = tableName; //  may be multiple tables generated
     }
-
+    
     public void insertToTable(String name, String type, String value) { // method to insert into table
         ArrayList<String> symbol = new ArrayList<>(); // used to insert into symtab
 	
