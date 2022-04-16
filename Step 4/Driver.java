@@ -27,7 +27,7 @@ public class Driver{
 		walker.walk(new SymbolExtractor(), tree);
 		System.out.println();
 
-		
+
 	if(parser.getNumberOfSyntaxErrors() == 0){
 		// System.out.println("Accepted");
 		// SymbolExtractor se = new SymbolExtractor();
@@ -52,12 +52,11 @@ public class Driver{
 
 class SymbolExtractor extends LittleBaseListener{
 	public Stack<SymTab> s;
-
 	SymTab cst;
-
 	ArrayList<SymTab> arLst;
-
 	int count = 0;
+
+
 
 	public SymbolExtractor(){
 		this.s = new Stack<SymTab>();
