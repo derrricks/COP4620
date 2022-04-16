@@ -56,7 +56,8 @@ class SymbolExtractor extends LittleBaseListener{
 	ArrayList<SymTab> arLst;
 	int count = 0;
 
-
+	ASTNode root;
+	ASTNODE ASTTree;
 
 	public SymbolExtractor(){
 		this.s = new Stack<SymTab>();
