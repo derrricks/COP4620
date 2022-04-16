@@ -47,7 +47,7 @@ public class SymTab { // symbol table class used to represent each table as need
      */
     public ArrayList<String> getName(String tableName){ // get table name, search for table by name
         if(search(tableName) == true){
-            return symtab.get(name);
+            return symtab.get(tableName);
         }else{
             return null;
         }
@@ -59,7 +59,7 @@ public class SymTab { // symbol table class used to represent each table as need
      * @return true/false
      */
     public boolean search(String tableName){
-        return symtab.get(name) != null;
+        return symtab.get(tableName) != null;
     }
 
 

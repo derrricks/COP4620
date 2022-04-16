@@ -25,7 +25,7 @@ public class SymTab { // symbol table class used to represent each table as need
     public SymTab(String tableName) { // Symbol Table constuctor, pass through name of table to call
         this.tableName = tableName; //  may be multiple tables generated
     }
-    
+
     public void insertToTable(String name, String type, String value) { // method to insert into table
         ArrayList<String> symbol = new ArrayList<>(); // used to insert into symtab
 	
@@ -47,7 +47,7 @@ public class SymTab { // symbol table class used to represent each table as need
      */
     public ArrayList<String> getName(String tableName){ // get table name, search for table by name
         if(search(tableName) == true){
-            return symtab.get(name);
+            return symtab.get(tableName);
         }else{
             return null;
         }
@@ -59,7 +59,7 @@ public class SymTab { // symbol table class used to represent each table as need
      * @return true/false
      */
     public boolean search(String tableName){
-        return symtab.get(name) != null;
+        return symtab.get(tableName) != null;
     }
 
 
