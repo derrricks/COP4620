@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 public class ASTNode {
 
     String element;
@@ -7,7 +8,7 @@ public class ASTNode {
         this.element = element;
     }
 
-    public void String getElement(){
+    public String getElement(){
         return element;
     }
 
