@@ -1,20 +1,3 @@
-/**
- *
- * Need to only worry about variable declaration related functions
- * •Your task in this step of the project is to construct symbol tables for
- * each scope (i.e., there are multiple scopes) in your program.
- *
- * •For each scope, construct a symbol table, then add entries to that
- * symbol table as you see declarations.
- *
- * •The declarations you have to handle are integer/ float declarations,
- * which should record the name and type of the variable, and string
- * declarations, which should additionally record the value of the string.
- *
- * https://www.tutorialcup.com/java/linkedhashmap-in-java.htm#:~:text=LinkedHashMap%20class%20in%20Java%20is%20a%20LinkedList%20implementation,iterate%20through%20all%20the%20nodes%20in%20the%20LinkedHashMap.
- * https://java2blog.com/print-arraylist-java/
- */
-
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 

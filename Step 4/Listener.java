@@ -17,13 +17,18 @@ public class Listener extends LittleBaseListener{
 		this.s = new Stack<SymTab>();
 		this.cst = null;
 		arLst = new ArrayList<SymTab>();
-		System.out.println("Initialized");
+		//System.out.println("Initialized");
 	}
 
 	@Override public void enterProgram(LittleParser.ProgramContext ctx) {
-		//System.out.println(ctx.getText());
-		this.s.push(new SymTab("GLOBAL"));
+		String global = "GLOBAL";
+		System.out.println(ctx.getText());
+		this.s.push(new SymTab(global));
 		this.cst = this.s.peek();
+
+		root = new ASTNode(global);
+		root.print();
+		//System.out.println(this.cst);
 	}
 
 	@Override public void exitProgram(LittleParser.ProgramContext ctx) {
@@ -62,10 +67,10 @@ public class Listener extends LittleBaseListener{
 	}
 
 	@Override public void enterFunc_decl(LittleParser.Func_declContext ctx) { 
-		// System.out.println(ctx.id().getText());
-		// this.cst.insertToTable(ctx.id().getText(), "", "");
-		// this.cst.print();
-		// System.out.println(ctx.getText());
+		//System.out.println(ctx.id().getText());
+		//System.out.println(ctx.getText());
+		//System.out.println(ctx.getChild(1).getText());
+		//System.out.println(ctx.getChild(2).getText());
 		this.s.push(new SymTab(ctx.id().getText()));
 		this.cst = this.s.peek();
 	}
