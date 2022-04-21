@@ -17,7 +17,7 @@ public class Listener extends LittleBaseListener{
 		this.s = new Stack<SymTab>();
 		this.cst = null;
 		arLst = new ArrayList<SymTab>();
-		// System.out.println("Initialized");
+		System.out.println("Initialized");
 	}
 
 	@Override public void enterProgram(LittleParser.ProgramContext ctx) {
