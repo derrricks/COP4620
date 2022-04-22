@@ -13,11 +13,27 @@ public class ASTNode {
     }
 
     public void print() {
-        System.out.println("Elements: " + this.getElement());
+        System.out.println("Element: " + this.getElement());
     }
 
     public void addChild(ASTNode child){
         this.children.add(child);
     }
+
+    public int totalChildren(){
+        return children.size();
+    }
+
+    public ASTNode getChild(int index){
+        return children.get(index);
+    }
+
+    public void displayTree() {
+        System.out.println("Element: " + this.getElement());
+        for (int i = 0; i < children.size(); i++) {
+            this.getChild(i).displayTree();
+        }
+    }
+
 
 }
