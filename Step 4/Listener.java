@@ -21,9 +21,9 @@ public class Listener extends LittleBaseListener{
 		//System.out.println("Initialized");
 	}
 
-
-	public void addASTTreeNode(String scope){
-		ASTTree.addChild(new ASTNode(scope));
+	// ASTNode(String use, String element, String value)
+	public void addASTTreeNode(String use, String element, String value){
+		ASTTree.addChild(new ASTNode(use, element, value));
 		ASTTree = ASTTree.getChild(ASTTree.totalChildren() - 1); // keep track of last node added to tree
 	}
 
@@ -34,7 +34,7 @@ public class Listener extends LittleBaseListener{
 		this.s.push(new SymTab(scope));
 		this.cst = this.s.peek();
 
-		ASTTree = root = new ASTNode(scope);
+		ASTTree = root = new ASTNode(scope, null, null);
 		// root.print();
 		// System.out.println(this.cst);
 	}
@@ -51,12 +51,13 @@ public class Listener extends LittleBaseListener{
 		for(int i = arLst.size() - 1; i >= 0; i--){
 			arLst.get(i).print();
 		}
-		root.displayTree();
+		//root.displayTree();
+		Generator.generateCode(root, ASTTree);
 	}
 
 	@Override public void enterString_decl(LittleParser.String_declContext ctx) {
 		//addASTTreeNode(ctx.str().STRINGLITERAL().getText());
-		addASTTreeNode("str " + ctx.id().IDENTIFIER().getText() + " " + ctx.str().STRINGLITERAL().getText());
+		addASTTreeNode("str", ctx.id().IDENTIFIER().getText(), ctx.str().STRINGLITERAL().getText());
 		this.cst.insertToTable(ctx.id().IDENTIFIER().getText(), "STRING", ctx.str().STRINGLITERAL().getText());
 	}
 
@@ -70,7 +71,7 @@ public class Listener extends LittleBaseListener{
 
 		for(int i = 0; i < arr.length; i++){
 			//addASTTreeNode(arr[i]);
-			addASTTreeNode("var " + arr[i]);
+			addASTTreeNode("var", arr[i], null);
 			this.cst.insertToTable(arr[i], ctx.var_type().getText(), "");
 		}
 		// this.cst.insertToTable(ctx.id_list().id().IDENTIFIER().getText(), ctx.var_type().getText(), "");
@@ -86,7 +87,7 @@ public class Listener extends LittleBaseListener{
 
 		// System.out.println("Printing Child 1: " +ctx.getChild(1).getText()); = 'VOID'
 		// System.out.println("Printing Child 2: " +ctx.getChild(2).getText()); = 'main'
-		addASTTreeNode(ctx.getChild(2).getText());
+		addASTTreeNode(ctx.getChild(2).getText(), null, null);
 
 		// System.out.println(ctx.id().getText());
 		// System.out.println(ctx.getText());
@@ -123,32 +124,30 @@ public class Listener extends LittleBaseListener{
 		this.cst = this.s.peek();
 	}
 
+	@Override public void enterAssign_expr(LittleParser.Assign_exprContext ctx) {
+		addASTTreeNode("Assign",ctx.getChild(0).getText(), ctx.getChild(2).getText());
+		//System.out.println("Printing Assign_expr Child 0: " + ctx.getChild(0).getText());
+		//System.out.println("Printing Assign_expr Child 1: " + ctx.getChild(1).getText());
+		//System.out.println("Printing Assign_expr Child 2: " + ctx.getChild(2).getText());
+	} 
 
-	@Override public void enterAddop(LittleParser.AddopContext ctx) {
-		//System.out.println("Printing enterAddop:" + ctx.getChild(0).getText());
+
+	@Override public void enterRead_stmt(LittleParser.Read_stmtContext ctx) {
+		addASTTreeNode(ctx.getChild(0).getText(), null, ctx.getChild(2).getText());
+		//System.out.println("Printing Read 1: " + ctx.getChild(0).getText());
+		//System.out.println("Printing Read 2: " + ctx.getChild(1).getText());
+		//System.out.println("Printing Read 3: " + ctx.getChild(2).getText());
+		//System.out.println("Printing Read 4: " + ctx.getChild(3).getText());
 	 }
 
-	@Override public void enterMulop(LittleParser.MulopContext ctx) {
-		//System.out.println("Printing enterMulop:" + ctx.getChild(0).getText());
-	}	
-	 
-	@Override public void enterPrimary(LittleParser.PrimaryContext ctx) {
-		//System.out.println("Printing enterPrimary:" + ctx.getChild(0).getText());
-	}
+	@Override public void enterWrite_stmt(LittleParser.Write_stmtContext ctx) {
+		addASTTreeNode(ctx.getChild(0).getText(), null, ctx.getChild(2).getText());
+		//System.out.println("Printing Write 1: " + ctx.getChild(0).getText());
+		//System.out.println("Printing Write 2: " + ctx.getChild(1).getText());
+		//System.out.println("Printing Write 3: " + ctx.getChild(2).getText());
+		//System.out.println("Printing Write 4: " + ctx.getChild(3).getText());
 
-	@Override public void enterAssign_stmt(LittleParser.Assign_stmtContext ctx) { 
-		//System.out.println("Printing enterAssign_stmt:" + ctx.getChild(0).getText());
-	}
+	 }
 
-	@Override public void enterAssign_expr(LittleParser.Assign_exprContext ctx) {
-		System.out.println("Printing Assign_expr Child 0: " + ctx.getChild(0).getText());
-		System.out.println("Printing Assign_expr Child 1: " + ctx.getChild(1).getText());
-		System.out.println("Printing Assign_expr Child 2: " + ctx.getChild(2).getText());
-	}
-
-	@Override public void enterFactor(LittleParser.FactorContext ctx) { 
-		System.out.println("Printing enterFactor Child 0: " + ctx.getChild(0).getText());
-		System.out.println("Printing enterFactor Child 1: " + ctx.getChild(1).getText());
-	}
 
 }
