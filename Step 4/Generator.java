@@ -16,9 +16,8 @@ public class Generator {
             System.out.println(code.get(i));
         }
     }
+    
 
-    
-    
     public static void parseTree(ASTNode root, ArrayList<String> code, int temp) {
 
         ASTNode current = root;
@@ -38,6 +37,7 @@ public class Generator {
                 if(current.getValue().contains(".")){
                     code.add(";STOREF " + current.getValue() + " $T" +tmp);
                     code.add(";STOREF $T" + tmp + " " + current.getElement());
+                    
                 }else{
 
                     code.add(";STOREI " + current.getValue() + " $T" +tmp);
@@ -121,11 +121,6 @@ public class Generator {
        // For WRITE
        if(current.getUse().equals("WRITE")){
 
-
-            if(current.value.contains(".")){
-                System.out.println("Found float");
-                current.print();
-            }
             String[] splitString = current.getValue().split(",");
             
             for(int i = 0; i < splitString.length; i++){
