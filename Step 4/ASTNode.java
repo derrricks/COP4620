@@ -40,12 +40,14 @@ public class ASTNode {
         return children.get(index);
     }
 
-    public void displayTree() {
-        System.out.println("Use: " + this.getUse() + "|Element: " + this.getElement() +  "|Value: " + this.getValue());
-        for (int i = 0; i <= children.size() - 1; i++) {
+
+    public static void displayTree(ASTNode root) {
+        ASTNode current = root;
+        System.out.println("Use: " + current.getUse() + "|Element: " + current.getElement() +  "|Value: " + current.getValue());
+        for (int i = 0; i < current.totalChildren(); i++) {
             //this.print();
-            this.getChild(i).displayTree();
+            current = current.getChild(i);
+            displayTree(current);
         }
-        
     }
 }

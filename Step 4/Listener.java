@@ -25,6 +25,7 @@ public class Listener extends LittleBaseListener{
 	public void addASTTreeNode(String use, String element, String value){
 		ASTTree.addChild(new ASTNode(use, element, value));
 		ASTTree = ASTTree.getChild(ASTTree.totalChildren() - 1); // keep track of last node added to tree
+		root.addChild(new ASTNode(use, element, value));
 	}
 
 
@@ -41,17 +42,17 @@ public class Listener extends LittleBaseListener{
 
 
 	@Override public void exitProgram(LittleParser.ProgramContext ctx) {
-		// System.out.println("GLOBAL");
-		// this.cst.print();
-		
+
 		while(!s.isEmpty()){
 			this.arLst.add(this.s.pop());
 		}
 
+		/*
 		for(int i = arLst.size() - 1; i >= 0; i--){
 			arLst.get(i).print();
 		}
-		//root.displayTree();
+		*/
+		root.displayTree(root);
 		Generator.generateCode(root, ASTTree);
 	}
 
@@ -87,7 +88,7 @@ public class Listener extends LittleBaseListener{
 
 		// System.out.println("Printing Child 1: " +ctx.getChild(1).getText()); = 'VOID'
 		// System.out.println("Printing Child 2: " +ctx.getChild(2).getText()); = 'main'
-		addASTTreeNode(ctx.getChild(2).getText(), null, null);
+		addASTTreeNode(ctx.getChild(1).getText(), ctx.getChild(2).getText(), null);
 
 		// System.out.println(ctx.id().getText());
 		// System.out.println(ctx.getText());
@@ -126,6 +127,7 @@ public class Listener extends LittleBaseListener{
 
 	@Override public void enterAssign_expr(LittleParser.Assign_exprContext ctx) {
 		addASTTreeNode("Assign",ctx.getChild(0).getText(), ctx.getChild(2).getText());
+		
 		//System.out.println("Printing Assign_expr Child 0: " + ctx.getChild(0).getText());
 		//System.out.println("Printing Assign_expr Child 1: " + ctx.getChild(1).getText());
 		//System.out.println("Printing Assign_expr Child 2: " + ctx.getChild(2).getText());
