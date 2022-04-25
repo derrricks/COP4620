@@ -1,12 +1,17 @@
 import java.util.ArrayList;
 
 public class Generator {
+    static String checkString;
+    static String checkFloat;
+    static String checkInt;
+
 
     public static void generateCode(ASTNode root, ASTNode tree){
 
         //root.displayTree();
         int register = 0;
         ArrayList<String> code = new ArrayList<>();
+    
 
         code.add(";IR code");
         parseTree(root, code, 0);
@@ -27,8 +32,14 @@ public class Generator {
         if(current.getElement() != null && current.getElement().equals("main")){
             code.add(";LABEL " + current.getElement());    
             code.add(";LINK");    
-       }
+        }
 
+
+        if(current.getUse().equals("FLOAT"))
+        {
+            checkFloat = "FLOAT";
+        }
+        
        if(current.getUse().equals("Assign")){
            ++tmp;
 
@@ -45,7 +56,7 @@ public class Generator {
                 }
             }
 
-           if(current.getValue() != null && current.getValue().contains(".")){ // float
+           if(current.getValue() != null && (current.getValue().contains(".") || (checkFloat != null && checkFloat.equals("FLOAT")))){ // float
                 
                 if(current.getValue().contains("*")){
 
@@ -60,8 +71,16 @@ public class Generator {
                 }else if(current.getValue().contains("/")){
 
                     String[] splitString = current.getValue().split("\\/"); 
-                    code.add(";DIVF " + splitString[0] + " " + splitString[1] + " $T" +tmp);
-                    code.add(";STOREF $T" + tmp + " " + current.getElement());
+                    if(splitString[1].contains(".")){
+                        //System.out.println(current.getElement());
+                        code.add(";STOREF " + splitString[1] + " $T" + tmp);
+                        code.add(";DIVF " + splitString[0] + " $T" + tmp + " $T" + ++tmp);
+                        code.add(";STOREF $T" + tmp + " " + current.getElement());
+
+                    }else {
+                        code.add(";DIVF " + splitString[0] + " " + splitString[1] + " $T" +tmp);
+                        code.add(";STOREF $T" + tmp + " " + current.getElement());
+                    }
                 }
 
            }else{ // int
@@ -122,10 +141,13 @@ public class Generator {
        if(current.getUse().equals("WRITE")){
 
             String[] splitString = current.getValue().split(",");
-            
+
             for(int i = 0; i < splitString.length; i++){
 
-                if(splitString[i].equals("newline")){
+                //System.out.printf("|%s|\n",splitString[i]);
+                if(checkFloat != null && checkFloat.equals("FLOAT") && !splitString[i].equals("newline")){
+                    code.add(";WRITEF " + splitString[i]);
+                }else if(splitString[i].equals("newline")){
                     code.add(";WRITES " + splitString[i]);
                 }else{
                     code.add(";WRITEI " + splitString[i]);

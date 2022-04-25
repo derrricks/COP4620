@@ -72,7 +72,8 @@ public class Listener extends LittleBaseListener{
 
 		for(int i = 0; i < arr.length; i++){
 			//addASTTreeNode(arr[i]);
-			addASTTreeNode("var", arr[i], null);
+			addASTTreeNode(ctx.var_type().getText(), arr[i], null);
+			//System.out.println(ctx.var_type().getText());
 			this.cst.insertToTable(arr[i], ctx.var_type().getText(), "");
 		}
 		// this.cst.insertToTable(ctx.id_list().id().IDENTIFIER().getText(), ctx.var_type().getText(), "");
@@ -127,7 +128,6 @@ public class Listener extends LittleBaseListener{
 
 	@Override public void enterAssign_expr(LittleParser.Assign_exprContext ctx) {
 		addASTTreeNode("Assign",ctx.getChild(0).getText(), ctx.getChild(2).getText());
-		
 		//System.out.println("Printing Assign_expr Child 0: " + ctx.getChild(0).getText());
 		//System.out.println("Printing Assign_expr Child 1: " + ctx.getChild(1).getText());
 		//System.out.println("Printing Assign_expr Child 2: " + ctx.getChild(2).getText());

@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+
+import javax.swing.RootPaneContainer;
 public class ASTNode {
 
     String use;
@@ -48,6 +50,21 @@ public class ASTNode {
             //this.print();
             current = current.getChild(i);
             displayTree(current);
+        }
+    }
+
+    public static void searchTreeForUse(ASTNode current, ASTNode root) {
+
+        ASTNode curr = root;
+        System.out.println("Use: " + curr.getUse() + "|Element: " + curr.getElement() +  "|Value: " + curr.getValue());
+        for (int i = 0; i < curr.totalChildren(); i++) {
+            //this.print();
+
+            //if()
+
+            curr = curr.getChild(i);
+            searchTreeForUse(current, curr);
+
         }
     }
 }
