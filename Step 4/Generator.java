@@ -59,6 +59,11 @@ public class Generator {
            if(current.getValue() != null && (current.getValue().contains(".") || (checkFloat != null && checkFloat.equals("FLOAT")))){ // float
                 
                 if(current.getValue().contains("*")){
+                    String[] splitString = current.getValue().split("\\*"); 
+                    //System.out.println(splitString[0]);
+                    //System.out.println(splitString[1]);
+                    code.add(";MULTF " + splitString[0] + " " + splitString[1] + " $T" +tmp);
+                    code.add(";STOREF $T" + tmp + " " + current.getElement());
 
                 }else if(current.getValue().contains("+")){
                     
@@ -67,6 +72,10 @@ public class Generator {
                     code.add(";STOREF $T" + tmp + " " + current.getElement());
 
                 }else if(current.getValue().contains("-")){
+
+                    String[] splitString = current.getValue().split("\\-"); 
+                    code.add(";SUBF " + splitString[0] + " " + splitString[1] + " $T" +tmp);
+                    code.add(";STOREF $T" + tmp + " " + current.getElement());
                
                 }else if(current.getValue().contains("/")){
 
