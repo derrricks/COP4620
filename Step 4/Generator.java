@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Generator {
-    static String checkFloat;
+    private static String checkFloat;
 
     public static void generateCode(ASTNode root, ASTNode tree){
 

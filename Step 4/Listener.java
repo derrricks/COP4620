@@ -52,8 +52,10 @@ public class Listener extends LittleBaseListener{
 			arLst.get(i).print();
 		}
 		*/
-		root.displayTree(root);
+		//root.displayTree(root);
 		Generator.generateCode(root, ASTTree);
+		//System.out.println();
+		buildTiny.buildCode(root, ASTTree);
 	}
 
 	@Override public void enterString_decl(LittleParser.String_declContext ctx) {
@@ -148,8 +150,5 @@ public class Listener extends LittleBaseListener{
 		//System.out.println("Printing Write 2: " + ctx.getChild(1).getText());
 		//System.out.println("Printing Write 3: " + ctx.getChild(2).getText());
 		//System.out.println("Printing Write 4: " + ctx.getChild(3).getText());
-
 	 }
-
-
 }
