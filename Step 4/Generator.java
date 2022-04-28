@@ -13,7 +13,7 @@ public class Generator {
         code.add(";IR code");
         parseTree(root, code, 0);
         code.add(";RET");
-        code.add(";tiny code");
+        //code.add(";tiny code");
         for(int i = 0; i < code.size(); i++) {   
             System.out.println(code.get(i));
         }
